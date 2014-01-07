@@ -26,6 +26,7 @@ class Board
 
   def move(start, finish)
     object = @board[start]
+    p object
     valid_moves = object.valid_moves(start, self)
 
     if valid_moves.include?(finish)
@@ -50,5 +51,6 @@ class Board
       puts
     end
     print "  a b c d e f g h"
+    puts
   end
 end

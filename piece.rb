@@ -26,24 +26,24 @@ class Rook < SlidingPiece
 
   def valid_moves(pos, board)
     valid_moves = []
-
     (1..8).each do |el|
-      valid_moves << "#{pos[0]}#{el}"
+
+      current_spot = board.board["#{pos[0]}#{el}"]
+      current_coordinate = "#{pos[0]}#{el}"
+      if current_coordinate < pos && current_spot.is_a?(Piece)
+        valid_moves = []
+        next
+      end
+      next if current_spot == self
+      break if current_coordinate > pos && current_spot.is_a?(Piece)
+      valid_moves << current_coordinate
     end
 
     ('a'..'h').each do |el|
       valid_moves << "#{el}#{pos[1]}"
     end
 
-    valid_moves.reject! do |el|
-      el == pos
-    end
-
-    valid_moves.reject! do |el|
-      unless board.board[el].nil?
-        board.board[el].color == @color
-      end
-    end
+    valid_moves
   end
 end
 

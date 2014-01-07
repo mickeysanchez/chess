@@ -9,6 +9,8 @@ class Chess
 end
 
 b = Board.new
-b.display
-puts
-b.move("a1","a2")
+b.move("a1", "e1")
+b.move("e1", "e5")
+b.move("e5", "a5")
+b.move("a5", "a1")
+b.move("a2", "a7")
