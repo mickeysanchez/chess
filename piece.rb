@@ -1,14 +1,10 @@
 require_relative 'board'
 
 class Piece
-  attr_accessor :current_pos
+  attr_reader :icon, :color
 
-  def initialize(start_pos)
-    @current_pos = start_pos
-  end
-
-  def valid_moves
-    ["a2", "e5"]
+  def initialize(color)
+    @color = color
   end
 end
 
@@ -22,11 +18,32 @@ class Bishop < SlidingPiece
 end
 
 class Rook < SlidingPiece
-  attr_reader :icon
 
-  def initialize(start_pos)
-    super(start_pos)
+  def initialize(color)
+    super(color)
     @icon = "\u2656"
+  end
+
+  def valid_moves(pos, board)
+    valid_moves = []
+
+    (1..8).each do |el|
+      valid_moves << "#{pos[0]}#{el}"
+    end
+
+    ('a'..'h').each do |el|
+      valid_moves << "#{el}#{pos[1]}"
+    end
+
+    valid_moves.reject! do |el|
+      el == pos
+    end
+
+    valid_moves.reject! do |el|
+      unless board.board[el].nil?
+        board.board[el].color == @color
+      end
+    end
   end
 end
 

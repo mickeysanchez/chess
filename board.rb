@@ -20,20 +20,21 @@ class Board
   end
 
   def create_initial_board
-    @board["a1"] = Rook.new("a1")
+    @board["a1"] = Rook.new("black")
+    @board["a2"] = Rook.new("black")
   end
 
   def move(start, finish)
-    p object = @board[start]
-    valid_moves = object.valid_moves
+    object = @board[start]
+    valid_moves = object.valid_moves(start, self)
 
     if valid_moves.include?(finish)
-      @board[finish]     = object
-      @board[start]      = nil
-      object.current_pos = finish
+      @board[finish]    = object
+      @board[start]     = nil
     else
-      "Invalid Move"
+      puts "Invalid Move"
     end
+    display
   end
 
   def display

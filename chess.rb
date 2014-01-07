@@ -7,3 +7,8 @@ class Chess
   end
 
 end
+
+b = Board.new
+b.display
+puts
+b.move("a1","a2")
