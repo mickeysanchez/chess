@@ -26,21 +26,65 @@ class Rook < SlidingPiece
 
   def valid_moves(pos, board)
     valid_moves = []
-    (1..8).each do |el|
 
+    (1..8).each do |el|
       current_spot = board.board["#{pos[0]}#{el}"]
       current_coordinate = "#{pos[0]}#{el}"
-      if current_coordinate < pos && current_spot.is_a?(Piece)
-        valid_moves = []
-        next
+
+      if current_coordinate < pos
+        if current_spot.is_a?(Piece) && current_spot.color == @color
+          valid_moves = []
+          next
+        elsif current_spot.is_a?(Piece) && current_spot.color != @color
+          valid_moves = [current_coordinate]
+          next
+        end
       end
+
       next if current_spot == self
-      break if current_coordinate > pos && current_spot.is_a?(Piece)
+
+      if current_coordinate > pos
+        if current_spot.is_a?(Piece) && current_spot.color == @color
+          break
+        elsif current_spot.is_a?(Piece) && current_spot.color != @color
+          valid_moves << current_coordinate
+          break
+        end
+      end
+
       valid_moves << current_coordinate
     end
 
+
+
+
+
     ('a'..'h').each do |el|
-      valid_moves << "#{el}#{pos[1]}"
+      current_spot = board.board["#{el}#{pos[1]}"]
+      current_coordinate = "#{el}#{pos[1]}"
+
+      if current_coordinate < pos
+        if current_spot.is_a?(Piece) && current_spot.color == @color
+          valid_moves = []
+          next
+        elsif current_spot.is_a?(Piece) && current_spot.color != @color
+          valid_moves = [current_coordinate]
+          next
+        end
+      end
+
+      next if current_spot == self
+
+      if current_coordinate > pos
+        if current_spot.is_a?(Piece) && current_spot.color == @color
+          break
+        elsif current_spot.is_a?(Piece) && current_spot.color != @color
+          valid_moves << current_coordinate
+          break
+        end
+      end
+
+      valid_moves << current_coordinate
     end
 
     valid_moves
