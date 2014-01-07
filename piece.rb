@@ -22,6 +22,12 @@ class Bishop < SlidingPiece
 end
 
 class Rook < SlidingPiece
+  attr_reader :icon
+
+  def initialize(start_pos)
+    super(start_pos)
+    @icon = "\u2656"
+  end
 end
 
 class Queen < SlidingPiece

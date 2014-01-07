@@ -35,4 +35,20 @@ class Board
       "Invalid Move"
     end
   end
+
+  def display
+    x = 1
+    ('a'..'h').to_a.reverse.each do |letter|
+      x = 1
+      8.times do
+        if @board[letter + x.to_s] == nil
+          print "_ "
+        else
+          print "#{@board[letter + x.to_s].icon} "
+        end
+        x += 1
+      end
+      puts
+    end
+  end
 end
