@@ -8,7 +8,7 @@ class Piece
   end
 
   def valid_moves
-    ["a2"]
+    ["a2", "e5"]
   end
 end
 

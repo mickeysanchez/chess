@@ -37,17 +37,14 @@ class Board
   end
 
   def display
-    x = 1
-    ('a'..'h').to_a.reverse.each do |letter|
-      print "#{letter.ord - 96} "
-      x = 1
-      8.times do |time|
-        if @board[letter + x.to_s] == nil
+     (1..8).to_a.reverse.each do |index|
+        print "#{index} "
+      ('a'..'h').to_a.each do |letter|
+        if @board[letter + index.to_s] == nil
           print "_ "
         else
-          print "#{@board[letter + x.to_s].icon} "
+          print "#{@board[letter + index.to_s].icon} "
         end
-        x += 1
       end
       puts
     end
