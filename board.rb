@@ -1,26 +1,38 @@
 class Board
   attr_accessor :board
+
   def initialize
-    @board = Array.new(8) { Array.new(8) { nil } }
+    @board = empty_board
     create_initial_board
   end
 
+  def empty_board
+    hash = {}
+    x = 1
+    ('a'..'h').each do |letter|
+      x = 1
+      8.times do
+        hash[letter + x.to_s] = nil
+        x += 1
+      end
+    end
+    hash
+  end
+
   def create_initial_board
-    @board[0][0] = Rook.new([0,0])[]
+    @board["a1"] = Rook.new("a1")
   end
 
   def move(start, finish)
-    object = @board[start[0]][start[1]]
+    p object = @board[start]
     valid_moves = object.valid_moves
 
     if valid_moves.include?(finish)
-      @board[start[0]][start[1]]   = nil
-      @board[finish[0]][finish[1]] = object
-      object.current_pos = [finish[0], finish[1]]
+      @board[finish]     = object
+      @board[start]      = nil
+      object.current_pos = finish
     else
       "Invalid Move"
     end
   end
-
-
 end
